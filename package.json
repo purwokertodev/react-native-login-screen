@@ -6,6 +6,13 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
+  "author": "Wuriyanto <wuriyanto48@yahoo.co.id>",
+  "keywords": [
+    "react",
+    "react-native",
+    "login",
+    "login screen"
+  ],
   "dependencies": {
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.0",
