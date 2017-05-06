@@ -6,8 +6,7 @@ import {
   View,
   TextInput,
   ScrollView,
-  Alert,
-  View
+  Alert
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -18,9 +17,32 @@ import Label from '../components/Label';
 import BackgroundImage from '../components/BackgroundImage';
 
 export default class Login extends Component {
-  press(){
+
+  constructor(){
+    super();
+    this.state = {
+      username: '',
+      password: ''
+    };
+  }
+
+  forgotPasswordAction(){
     Alert.alert('Forgot Password ?');
   }
+
+  loginAction(){
+    let user = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    console.log(user);
+    Alert.alert(`Login as ${user.username}`);
+  }
+
+  registerAction(){
+    Alert.alert('Registering');
+  }
+
   render(){
     return(
       <BackgroundImage>
@@ -29,24 +51,30 @@ export default class Login extends Component {
             <Button
               label='Forgot Password ?'
               styles={{button: styles.alignRight, label: styles.label}}
-              onPress={this.press.bind(this)}>
+              onPress={this.forgotPasswordAction.bind(this)}>
 
             </Button>
           </Container>
           <Container>
             <Label text='Username or Email'/>
-            <TextInput style={styles.textInput}/>
+            <TextInput style={styles.textInput}  onChangeText={(text) => this.setState({username: text})}/>
           </Container>
           <Container>
             <Label text='Password'/>
-            <TextInput secureTextEntry={true} style={styles.textInput}/>
+            <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(text) => this.setState({password: text})}/>
           </Container>
           <View>
             <Container>
               <Button
-                label='Forgot Password ?'
-                styles={{button: styles.alignRight, label: styles.label}}
-                onPress={this.press.bind(this)}>
+                label='Login'
+                styles={{button: styles.loginButton, label: styles.buttonWhiteText}}
+                onPress={this.loginAction.bind(this)}>
+
+              </Button>
+              <Button
+                label='Register'
+                styles={{label: styles.registerButton}}
+                onPress={this.registerAction.bind(this)}>
 
               </Button>
             </Container>
@@ -63,7 +91,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   label: {
-    color: '#0d8898',
+    color: '#04acdb',
     fontSize: 20
   },
 
@@ -78,8 +106,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#FFF'
   },
-  signButton: {
-    backgroundColor: '#42bcf4'
+  loginButton: {
+    backgroundColor: '#f43924'
+  },
+  registerButton: {
+    color: '#f43924',
+    fontSize: 20
   },
   footer: {
     marginTop: 100
